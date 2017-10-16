@@ -1,0 +1,13 @@
+<div class="main">
+  <md-grid-list id="mainGrid" cols="2" gutterSize="20px" rowHeight="250px" class="shops-grid container">
+    <md-grid-tile *ngFor="let shop of shops">
+      <md-card class="example-card" (click)="showShop(shop.id)">
+        <img md-card-image src="{{'img/' + shop.id + '/' + shop.logo}}">
+        <md-card-footer class="footer">
+          <md-card-title>{{shop.name}}</md-card-title>
+          <md-card-subtitle>{{shop.address}}</md-card-subtitle>
+        </md-card-footer>
+      </md-card>
+    </md-grid-tile>
+  </md-grid-list>
+</div>

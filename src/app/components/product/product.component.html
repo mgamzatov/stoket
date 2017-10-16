@@ -1,0 +1,25 @@
+<div style="padding-top: 12px;padding-bottom: 12px;">
+<md-card *ngIf="product!=null" class="example-card">
+  <md-card-header (click)="showShop(product.shop.id)">
+    <div md-card-avatar [style.background-image]="'url(img/' + product.shop.id + '/' + product.shop.logo +')'" class="example-header-image">
+    </div>
+    <md-card-title>{{product.shop.name}}</md-card-title>
+    <md-card-subtitle>{{product.shop.address}}</md-card-subtitle>
+  </md-card-header>
+  <img md-card-image src="{{'img/' + product.shop.id + '/' + product.id + '/' + product.imageUrls[0]}}">
+  <md-card-content>
+    <p>
+      Бренд: {{product.brand}}
+    </p>
+    <p>
+      Тип: {{product.type.name}}
+    </p>
+    <p>
+      Цена: {{product.price}}
+    </p>
+    <p>
+      {{product.description}}
+    </p>
+  </md-card-content>
+</md-card>
+</div>

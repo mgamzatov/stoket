@@ -1,0 +1,56 @@
+<div class="container">
+  <hr>
+  <br>
+  <span>Фильтры</span>
+  <div style="margin-top: 20px">
+    <md-input-container class="fullWidth">
+      <input mdInput placeholder="Бренд" [mdAutocomplete]="auto" [formControl]="brandCtrl" [(ngModel)]="brandFilter">
+    </md-input-container>
+    <md-autocomplete #auto="mdAutocomplete">
+      <md-option *ngFor="let brand of filteredBrands | async" [value]="brand">
+        {{ brand }}
+      </md-option>
+    </md-autocomplete>
+  </div>
+  <div>
+    <md-input-container class="fullWidth">
+      <input mdInput placeholder="Описание" [(ngModel)]="descriptionFilter">
+    </md-input-container>
+  </div>
+  <div>
+    <md-input-container style="width: 48%">
+      <input type="number" mdInput placeholder="Цена от" [(ngModel)]="priceMinFilter">
+    </md-input-container>
+    <md-input-container style="width: 48%">
+      <input type="number" mdInput placeholder="Цена до" [(ngModel)]="priceMaxFilter">
+    </md-input-container>
+  </div>
+  <div class="input">
+    <md-select placeholder="Пол" class="fullWidth" [(ngModel)]="genderFilter">
+      <md-option [value]="null">Все</md-option>
+      <md-option [value]="0">Мужской</md-option>
+      <md-option [value]="1">Женский</md-option>
+    </md-select>
+  <div class="input" style="margin-top: 20px">
+    <md-select placeholder="Тип" class="fullWidth" [(ngModel)]="typeIdFilter">
+      <md-option [value]="null">Все</md-option>
+      <md-option *ngFor="let type of types" [value]="type.id">
+        {{ type.name }}
+      </md-option>
+    </md-select>
+  </div>
+  <div class="input">
+    <md-select placeholder="Магазин" class="fullWidth" [(ngModel)]="shopIdFilter">
+      <md-option [value]="null">Все</md-option>
+      <md-option *ngFor="let shop of shops" [value]="shop.id">
+        {{ shop.name }}
+      </md-option>
+    </md-select>
+  </div>
+  <div style="margin-top: 30px">
+    <button color="primary" md-raised-button class="fullWidth" (click)="onSubmit()">Применить</button>
+  </div>
+  <div style="margin-top: 15px">
+    <button md-button class="fullWidth" (click)="onResetAll()">Сбросить все</button>
+  </div>
+</div>

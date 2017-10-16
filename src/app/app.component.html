@@ -1,3 +1,32 @@
-<h1>
-  {{title}}
-</h1>
+<div style="position:absolute;top:0;left:0;right:0;bottom:0;">
+  <md-sidenav-container #sidenav style="height:100%;width:100%;">
+    <md-sidenav [mode]="mode | async" [opened]="opened | async" #sidenav style="min-width:230px;">
+      <a md-button style="height: 0; position: absolute;"> <!-- 'absorbs' the behavior -->
+      </a>
+      <md-nav-list style="margin-top: 15px">
+        <a md-list-item routerLink="/" class="md-list-item-element"
+           [class.active]="activeNavItem === 0"
+           (click)="setActiveNavItem(0)">Главная</a>
+        <a md-list-item [routerLink]="[{outlets: {'primary': 'shops', 'product': null, 'shop': null}}]" class="md-list-item-element"
+           [class.active]="activeNavItem === 1"
+           (click)="setActiveNavItem(1)">Магазины</a>
+      </md-nav-list>
+      <app-filters *ngIf="showFilters"></app-filters>
+    </md-sidenav>
+    <md-toolbar color="primary" class="toolbar">
+      <button style="background-color:transparent;border-style:none;cursor:pointer;" (click)="sidenav.toggle()">
+        <md-icon style="color:white;">menu</md-icon>
+      </button>
+      <span class="center">Stoket</span>
+    </md-toolbar>
+    <div class="inner-sidenav-content">
+        <router-outlet name="product"></router-outlet>
+        <div [hidden]="hideList" style="height: 100%;">
+          <router-outlet></router-outlet>
+        </div>
+      <div [hidden]="hideShop" style="height: 100%;">
+        <router-outlet name="shop"></router-outlet>
+      </div>
+    </div>
+  </md-sidenav-container>
+</div>

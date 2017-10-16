@@ -1,0 +1,52 @@
+<div style="height:100%;">
+  <md-grid-list id="shopGrid" [cols]="cols | async" gutterSize="15px" class="grid container" rowHeight="400px"
+                infiniteScroll
+                [infiniteScrollDistance]="6"
+                [infiniteScrollThrottle]="300"
+                [scrollWindow]="false"
+                (scrolled)="onScroll()">
+    <md-grid-tile [colspan]="cols | async">
+      <md-card *ngIf="shop!=null" class="example-card" style="width: 93%">
+        <md-card-content>
+          <div>
+            <table>
+              <tbody>
+                <tr>
+                  <td rowspan="3">
+                    <img src="{{'img/' + shop.id + '/' + shop.logo}}" style="width: 290px;height: 290px;object-fit: cover;">
+                  </td>
+                  <td height="10%">
+                    <span style="font-size: 30pt;font-weight: 400;">{{shop.name}}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span>{{shop.address}}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span>{{shop.phone}}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </md-card-content>
+      </md-card>
+    </md-grid-tile>
+    <md-grid-tile *ngFor="let product of products">
+      <md-card class="example-card" (click)="showProduct(product.id)">
+        <img md-card-image src="{{'img/' + product.shop.id + '/' + product.id + '/small_400.jpg'}}">
+        <md-card-footer class="footer">
+          <md-card-title>{{product.brand}}</md-card-title>
+          <md-card-subtitle><span>{{product.type.name}}</span><span style="float: right;margin-right: 20px;">{{product.shop.name}}</span></md-card-subtitle>
+        </md-card-footer>
+      </md-card>
+    </md-grid-tile>
+    <md-grid-tile *ngIf="showSpinner">
+      <md-progress-spinner color="primary" mode="indeterminate">
+      </md-progress-spinner>
+    </md-grid-tile>
+  </md-grid-list>
+</div>
